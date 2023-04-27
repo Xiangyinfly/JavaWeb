@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1 align="center">注册</h1>
+  <input type="hidden" name="action" value="login">
+  <form action="http://localhost:8080" method="post">
+    <table align="center">
+      <tr>
+        <td>username:<br/></td>
+        <td><input type="text" name="name" value="default"/></td>
+      </tr>
+      <tr>
+        <td>password:<br/></td>
+        <td><input type="password" name="passwd"/></td>
+      </tr>
+      <tr>
+        <td>gender</td>
+        <td>
+          <input type="radio" name="gender" checked="checked" value="boy"/>man
+          <input type="radio" name="gender" value="girl"/>woman <br/>
+        </td>
+      </tr>
+      <tr>
+        <td>hobby</td>
+        <td>
+          <input type="checkbox" name="hobby" value="java"/>java
+          <input type="checkbox" name="hobby" value="python"/>python
+          <input type="checkbox" name="hobby" value="php"/>php <br/>
+        </td>
+      </tr>
+      <tr>
+        <td>nation</td>
+        <td>
+          <select>
+            <option>----choose----</option>
+            <option selected="selected" value="cn">China</option>
+            <option value="us">America</option>
+          </select><br/>
+        </td>
+      </tr>
+      <tr>
+        <td>comment</td>
+        <td>
+          <textarea rows="20" cols="20" name="desc">default</textarea><br/>
+        </td>
+      </tr>
+      <tr>
+        <td><input type="reset"></td>
+        <td><input type="submit"></td>
+      </tr>
+      <tr>
+        <td><input type="file"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>

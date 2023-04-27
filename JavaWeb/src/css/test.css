@@ -1,0 +1,17 @@
+#id1{
+    border: antiquewhite 1px solid;
+}
+span{
+    border: aquamarine 1px solid;
+    color: red;
+    width: 1000px;
+    height: 1000px;
+    background-color: fuchsia;
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.class{
+
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script type="text/javascript">
+    function onclickFun() {
+      alert("hello");
+    }
+
+    window.onload = function () {
+      var elementById = document.getElementById("bt1");
+      elementById.onclick = function () {
+        alert("nihao");
+      }
+    }
+
+    function onchangeFun() {
+      console.log("hhh");
+    }
+
+    window.onload = function () {
+      document.getElementById("id2").onchange = function () {
+        console.log("111");
+      }
+    }
+  </script>
+</head>
+<body>
+<button onclick="onclickFun()">bt2</button>
+<button id="bt1">bt1</button>
+choose one<br/>
+<select onchange="onchangeFun()">
+  <option>aa</option>
+  <option>bb</option>
+  <option>cc</option>
+</select>
+<select id="id2">
+  <option>aa</option>
+  <option>bb</option>
+  <option>cc</option>
+</select>
+</body>
+</html>
