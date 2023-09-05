@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,6 +71,9 @@ public class dispatcherServlet extends ViewBaseServlet {
         try {
             Method method = controllerBeanObj.getClass().getDeclaredMethod(key, HttpServletRequest.class);
             if (method != null) {
+                Parameter[] parameters = method.getParameters();
+
+
                 method.setAccessible(true);
                 Object methodReturnObj = method.invoke(controllerBeanObj,req);
                 String methodReturnStr = (String) methodReturnObj;
@@ -82,7 +86,7 @@ public class dispatcherServlet extends ViewBaseServlet {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("invalid key!");
         }
 
 //        Method[] methods = controllerBeanObj.getClass().getDeclaredMethods();
