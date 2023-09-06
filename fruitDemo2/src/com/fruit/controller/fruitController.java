@@ -24,6 +24,10 @@ public class fruitController extends ViewBaseServlet {
     private String index(String operate,String keyword,Integer page,HttpServletRequest req) {
         HttpSession session = req.getSession();
 
+        if (page == null) {
+            page = 1;
+        }
+
         if (stringUtil.isNotEmpty(operate) && operate.equals("search")) {//此处说明是通过查询进入的
             page = 1;
             if (stringUtil.isEmpty(keyword)) {

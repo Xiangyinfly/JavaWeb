@@ -54,7 +54,7 @@ public class dispatcherServlet extends ViewBaseServlet {
     }
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("utf-8");
         String servletPath = req.getServletPath();
         servletPath = servletPath.substring(1);
@@ -69,24 +69,47 @@ public class dispatcherServlet extends ViewBaseServlet {
         }
 
         try {
-            Method method = controllerBeanObj.getClass().getDeclaredMethod(key, HttpServletRequest.class);
-            if (method != null) {
-                Parameter[] parameters = method.getParameters();
+            Method[] methods = controllerBeanObj.getClass().getDeclaredMethods();
+            for (Method method :methods) {
+                if (key.equals(method.getName())) {
+                    Parameter[] parameters = method.getParameters();
+                    Object[] parameterValues = new Object[parameters.length];
+                    for (int i = 0; i < parameters.length; i++) {
+                        Parameter parameter = parameters[i];
+                        String parameterName = parameter.getName();
+                        if ("req".equals(parameterName)) {
+                            parameterValues[i] = req;
+                        } else if ("resp".equals(parameterName)) {
+                            parameterValues[i] = resp;
+                        } else if ("session".equals(parameterName)) {
+                            parameterValues[i] = req.getSession();
+                        } else {
+                            String parameterValue = req.getParameter(parameterName);
+                            Object parameterObj = parameterValue;
 
+                            if (parameterObj != null) {
+                                if ("java.lang.Integer".equals(parameter.getType().getName())) {
+                                    parameterObj = Integer.parseInt(parameterValue);
+                                }
+                            }
+                            parameterValues[i] = parameterObj;
+                        }
+                    }
 
-                method.setAccessible(true);
-                Object methodReturnObj = method.invoke(controllerBeanObj,req);
-                String methodReturnStr = (String) methodReturnObj;
+                    method.setAccessible(true);
+                    Object methodReturnObj = method.invoke(controllerBeanObj,parameterValues);
+                    String methodReturnStr = (String) methodReturnObj;
 
-                if (methodReturnStr.startsWith("redirect:")) {
-                    String redirectStr = methodReturnStr.substring("redirect:".length());
-                    resp.sendRedirect(redirectStr);
-                } else {
-                    super.processTemplate(methodReturnStr,req,resp);
+                    if (methodReturnStr.startsWith("redirect:")) {
+                        String redirectStr = methodReturnStr.substring("redirect:".length());
+                        resp.sendRedirect(redirectStr);
+                    } else {
+                        super.processTemplate(methodReturnStr,req,resp);
+                    }
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException("invalid key!");
+            throw new RuntimeException();
         }
 
 //        Method[] methods = controllerBeanObj.getClass().getDeclaredMethods();
