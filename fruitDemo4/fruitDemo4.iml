@@ -4,10 +4,10 @@
     <facet type="web" name="Web">
       <configuration>
         <descriptors>
-          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/WebContent/WEB-INF/web.xml" />
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/WebContent/web/WEB-INF/web.xml" />
         </descriptors>
         <webroots>
-          <root url="file://$MODULE_DIR$/WebContent" relative="/" />
+          <root url="file://$MODULE_DIR$/WebContent/web" relative="/" />
         </webroots>
       </configuration>
     </facet>
@@ -19,15 +19,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="druid-1.2.9" level="project" />
-    <orderEntry type="library" name="mysql-connector-j-8.0.32" level="project" />
     <orderEntry type="library" name="attoparser-2.0.5.RELEASE" level="project" />
+    <orderEntry type="library" name="commons-dbutils-1.8.0" level="project" />
+    <orderEntry type="library" name="druid-1.2.9" level="project" />
     <orderEntry type="library" name="javassist-3.20.0-GA" level="project" />
+    <orderEntry type="library" name="mysql-connector-j-8.0.32" level="project" />
     <orderEntry type="library" name="ognl-3.1.26" level="project" />
     <orderEntry type="library" name="slf4j-api-1.7.25" level="project" />
     <orderEntry type="library" name="thymeleaf-3.0.14.RELEASE" level="project" />
     <orderEntry type="library" name="unbescape-1.1.6.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.80" level="application_server_libraries" />
-    <orderEntry type="library" name="commons-dbutils-1.8.0" level="project" />
   </component>
 </module>

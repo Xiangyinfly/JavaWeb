@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="filter_listener:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/filter_listener_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="filter_listener/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="filter_listener" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
