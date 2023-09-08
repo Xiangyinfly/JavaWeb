@@ -17,14 +17,15 @@ public interface BasicDao<T> {
         try {
             connection = JDBCUtils.getConnection();
             int update = qr.update(connection, sql, parameters);
+
+            if (connection.getAutoCommit()) {//如果开启事务，就让业务层去关闭
+                JDBCUtils.closeConnection();
+            }
+
             return update;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            JDBCUtils.closeConnection();
-
         }
-
     }
 
 
@@ -32,24 +33,27 @@ public interface BasicDao<T> {
         Connection connection = null;
         try {
             connection = JDBCUtils.getConnection();
-            return qr.query(connection, sql, new BeanListHandler<T>(clazz), parameters);
+            List<T> query = qr.query(connection, sql, new BeanListHandler<T>(clazz), parameters);
+            if (connection.getAutoCommit()) {//如果开启事务，就让业务层去关闭
+                JDBCUtils.closeConnection();
+            }
+            return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            JDBCUtils.closeConnection();
         }
-
     }
 
     default T singleQuery(String sql, Class<T> clazz, Object... parameters) {
         Connection connection = null;
         try {
             connection = JDBCUtils.getConnection();
-            return qr.query(connection, sql, new BeanHandler<T>(clazz), parameters);
+            T query = qr.query(connection, sql, new BeanHandler<T>(clazz), parameters);
+            if (connection.getAutoCommit()) {//如果开启事务，就让业务层去关闭
+                JDBCUtils.closeConnection();
+            }
+            return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            JDBCUtils.closeConnection();
         }
     }
 
@@ -58,11 +62,13 @@ public interface BasicDao<T> {
         Connection connection = null;
         try {
             connection = JDBCUtils.getConnection();
-            return qr.query(connection, sql, new ScalarHandler(), parameters);
+            Object query = qr.query(connection, sql, new ScalarHandler(), parameters);
+            if (connection.getAutoCommit()) {//如果开启事务，就让业务层去关闭
+                JDBCUtils.closeConnection();
+            }
+            return query;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            JDBCUtils.closeConnection();
         }
     }
 }

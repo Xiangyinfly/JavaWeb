@@ -89,6 +89,7 @@ public class dispatcherServlet extends ViewBaseServlet {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException();
         }
 

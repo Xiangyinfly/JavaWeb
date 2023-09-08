@@ -28,6 +28,6 @@
     <orderEntry type="library" name="slf4j-api-1.7.25" level="project" />
     <orderEntry type="library" name="thymeleaf-3.0.14.RELEASE" level="project" />
     <orderEntry type="library" name="unbescape-1.1.6.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.80" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.93" level="application_server_libraries" />
   </component>
 </module>
