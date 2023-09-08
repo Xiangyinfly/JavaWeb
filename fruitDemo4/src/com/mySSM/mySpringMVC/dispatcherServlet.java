@@ -90,7 +90,7 @@ public class dispatcherServlet extends ViewBaseServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException();
+            throw new DispatcherServletException("dispatcherServlet error!");
         }
 
 //        Method[] methods = controllerBeanObj.getClass().getDeclaredMethods();

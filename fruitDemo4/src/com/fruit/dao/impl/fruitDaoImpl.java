@@ -1,6 +1,7 @@
 package com.fruit.dao.impl;
 
 import com.fruit.dao.fruitDao;
+import com.mySSM.baseDao.DaoException;
 import com.fruit.pojo.Fruit;
 import com.mySSM.baseDao.BasicDao;
 

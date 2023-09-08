@@ -25,7 +25,7 @@ public class openSessionInViewFilter implements Filter {
             try {
                 transactionManager.rollback();
             } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                ex.printStackTrace();
             }
         }
     }

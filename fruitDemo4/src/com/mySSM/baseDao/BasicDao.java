@@ -14,6 +14,7 @@ public interface BasicDao<T> {
 
     default int update(String sql, Object... parameters) {
         Connection connection = null;
+
         try {
             connection = JDBCUtils.getConnection();
             int update = qr.update(connection, sql, parameters);
@@ -21,16 +22,20 @@ public interface BasicDao<T> {
             if (connection.getAutoCommit()) {//如果开启事务，就让业务层去关闭
                 JDBCUtils.closeConnection();
             }
-
             return update;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DaoException("update error!");
         }
+
+
+
     }
 
 
     default List<T> multiQuery(String sql, Class<T> clazz, Object... parameters) {
         Connection connection = null;
+
         try {
             connection = JDBCUtils.getConnection();
             List<T> query = qr.query(connection, sql, new BeanListHandler<T>(clazz), parameters);
@@ -38,13 +43,17 @@ public interface BasicDao<T> {
                 JDBCUtils.closeConnection();
             }
             return query;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DaoException("multiQuery error!");
         }
+
+
     }
 
     default T singleQuery(String sql, Class<T> clazz, Object... parameters) {
         Connection connection = null;
+
         try {
             connection = JDBCUtils.getConnection();
             T query = qr.query(connection, sql, new BeanHandler<T>(clazz), parameters);
@@ -52,14 +61,17 @@ public interface BasicDao<T> {
                 JDBCUtils.closeConnection();
             }
             return query;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DaoException("singleQuery error!");
         }
+
     }
 
 
     default Object scalarQuery(String sql, Object... parameters) {
         Connection connection = null;
+
         try {
             connection = JDBCUtils.getConnection();
             Object query = qr.query(connection, sql, new ScalarHandler(), parameters);
@@ -67,8 +79,11 @@ public interface BasicDao<T> {
                 JDBCUtils.closeConnection();
             }
             return query;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DaoException("scalarQuery error!");
         }
+
+
     }
 }
